@@ -1,17 +1,17 @@
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX ex:   <http://example.org/>
 
-# SELECT ?name
-# WHERE {
-#   ex:alice foaf:name ?name .
-# }
+SELECT ?name
+WHERE {
+  ex:alice foaf:name ?name .
+}
 
 # SELECT ?person
 # WHERE {
 #  ?person a foaf:Person .
 # }
 
-SELECT ?s
-WHERE {
-  ?s foaf:name "Bob" .
-}
+# SELECT ?s
+# WHERE {
+#   ?s foaf:name "Bob" .
+# }
