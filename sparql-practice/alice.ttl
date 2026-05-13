@@ -1,0 +1,17 @@
+# Graph: http://example.org/alice
+
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+
+ex:alice a foaf:Person .
+ex:alice foaf:name "Alice" .
+ex:alice foaf:mbox <mailto:alice@example.org> .
+ex:alice foaf:knows ex:bob .
+ex:bob foaf:knows ex:alice .
+ex:bob foaf:name "Bob" .
+ex:alice foaf:knows ex:charlie .
+ex:charlie foaf:knows ex:alice .
+ex:charlie foaf:name "Charlie" .
+ex:alice foaf:knows ex:snoopy .
+ex:snoopy foaf:name "Snoopy"@en .
