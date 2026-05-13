@@ -15,3 +15,4 @@ ex:charlie foaf:knows ex:alice .
 ex:charlie foaf:name "Charlie" .
 ex:alice foaf:knows ex:snoopy .
 ex:snoopy foaf:name "Snoopy"@en .
+# @en a language tag for a string literal
