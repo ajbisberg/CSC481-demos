@@ -11,7 +11,6 @@ ex:covers rdfs:range ex:Topic .
 ex:fol rdf:type ex:AI .
 ex:Instructor rdfs:subClassOf ex:Person .
 ex:teaches rdfs:subPropertyOf ex:worksOn .
-ex:csc481 rdf:type ex:ai .
 
 ex:alex ex:teaches ex:csc481 .
 ex:csc481 ex:covers ex:fol .
