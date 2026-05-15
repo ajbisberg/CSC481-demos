@@ -1,0 +1,17 @@
+# Graph: http://example.org/alex
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+
+ex:teaches rdfs:domain ex:Instructor .
+ex:teaches rdfs:range ex:Course .
+ex:covers rdfs:domain ex:Course .
+ex:covers rdfs:range ex:Topic .
+ex:fol rdf:type ex:AI .
+ex:Instructor rdfs:subClassOf ex:Person .
+ex:teaches rdfs:subPropertyOf ex:worksOn .
+ex:csc481 rdf:type ex:ai .
+
+ex:alex ex:teaches ex:csc481 .
+ex:csc481 ex:covers ex:fol .

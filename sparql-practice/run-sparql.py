@@ -2,8 +2,11 @@
 
 Examples:
     python run-sparql.py alice.ttl scratch.rq
+    python run-sparql.py --reason alice.ttl scratch.rq 
     python run-sparql.py alice.ttl --query "SELECT ?s ?p ?o WHERE { ?s ?p ?o }"
-Docs: https://rdflib.readthedocs.io/en/7.1.1/intro_to_sparql.html
+Docs: 
+  - https://rdflib.readthedocs.io/en/7.1.1/intro_to_sparql.html
+  - https://owl-rl.readthedocs.io/en/latest/
 """
 
 from __future__ import annotations
@@ -13,6 +16,19 @@ from pathlib import Path
 
 from rdflib import Graph
 from rdflib.query import Result
+
+
+def add_reasoning(graph: Graph) -> None:
+    """Materialize RDFS and OWL RL entailments into the graph."""
+    try:
+        from owlrl import DeductiveClosure, RDFS_OWLRL_Semantics
+    except ImportError as exc:
+        raise SystemExit(
+            "The --reason flag requires owlrl. Install it with:\n"
+            "  conda run -n codex python -m pip install owlrl"
+        ) from exc
+
+    DeductiveClosure(RDFS_OWLRL_Semantics).expand(graph)
 
 
 def term_text(term, graph: Graph) -> str:
@@ -59,6 +75,11 @@ def main() -> None:
         default="turtle",
         help="RDF parser format for the data file. Default: turtle",
     )
+    parser.add_argument(
+        "--reason",
+        action="store_true",
+        help="Materialize RDFS and OWL RL entailments with owlrl before querying.",
+    )
     args = parser.parse_args()
 
     if not args.query and not args.query_file:
@@ -67,6 +88,8 @@ def main() -> None:
     data_path = Path(args.data)
     graph = Graph()
     graph.parse(data_path, format=args.format)
+    if args.reason:
+        add_reasoning(graph)
 
     query_text = args.query
     if query_text is None:
